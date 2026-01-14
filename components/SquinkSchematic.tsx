@@ -10,17 +10,21 @@ export const SquinkSchematic: React.FC = () => {
 
   return (
     <div className="relative w-full h-[550px] flex items-center justify-center pointer-events-none">
-      {/* Concentric Schematic Rings (Static as requested) */}
-      <div className="absolute w-[700px] h-[700px] border border-white/5 rounded-full">
-         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-10 bg-white/20"></div>
-         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-10 bg-white/20"></div>
-         <div className="absolute left-0 top-1/2 -translate-y-1/2 h-px w-10 bg-white/20"></div>
-         <div className="absolute right-0 top-1/2 -translate-y-1/2 h-px w-10 bg-white/20"></div>
+      {/* Concentric Schematic Rings with Opacity Gradient */}
+      
+      {/* Outer Ring (Least Opaque) */}
+      <div className="absolute w-[700px] h-[700px] border border-white/[0.03] rounded-full">
+         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-10 bg-white/10"></div>
+         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-10 bg-white/10"></div>
+         <div className="absolute left-0 top-1/2 -translate-y-1/2 h-px w-10 bg-white/10"></div>
+         <div className="absolute right-0 top-1/2 -translate-y-1/2 h-px w-10 bg-white/10"></div>
       </div>
-      <div className="absolute w-[500px] h-[500px] border border-white/10 rounded-full">
-         {/* Diagonal cross lines removed per user request */}
-      </div>
-      <div className="absolute w-[350px] h-[350px] border border-ink-pink/10 rounded-full"></div>
+      
+      {/* Middle Ring */}
+      <div className="absolute w-[500px] h-[500px] border border-white/[0.07] rounded-full"></div>
+      
+      {/* Inner Ring (Most Opaque / Near Mascot) */}
+      <div className="absolute w-[350px] h-[350px] border border-white/[0.12] rounded-full"></div>
       
       {/* Degree Markers */}
       <div className="absolute w-[750px] h-[750px] mono text-[9px] text-gray-700 font-bold uppercase tracking-widest">

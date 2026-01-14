@@ -12,7 +12,8 @@
     :root {
       --ink-pink: #E6007A;
       --bg-void: #0A0A0B;
-      --line-color: rgba(255, 255, 255, 0.05);
+      --line-color: rgba(255, 255, 255, 0.03);
+      --major-line: rgba(255, 255, 255, 0.07);
     }
     body {
       font-family: 'Space Grotesk', sans-serif;
@@ -23,38 +24,27 @@
     }
     .mono { font-family: 'JetBrains Mono', monospace; }
     
-    /* Schematic Background */
+    /* Structural Grid Lines */
     .grid-bg {
       position: fixed;
       inset: 0;
       background-image: 
         linear-gradient(to right, var(--line-color) 1px, transparent 1px),
         linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-size: 40px 40px;
       z-index: -2;
     }
 
-    /* Crosshair & Schematic lines */
-    .schematic-overlay {
+    /* Major Layout Lines (Tailark Style) */
+    .structural-lines {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: -1;
     }
-    .cross-v { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line-color); }
-    .cross-h { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--line-color); }
-    
-    /* Corner Markers */
-    .corner { position: fixed; width: 20px; height: 20px; border: 1px solid rgba(255,255,255,0.2); z-index: 10; }
-    .corner-tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
-    .corner-tr { top: 20px; right: 20px; border-left: 0; border-bottom: 0; }
-    .corner-bl { bottom: 20px; left: 20px; border-right: 0; border-top: 0; }
-    .corner-br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
-    
-    /* Side Markers (T-shapes) */
-    .side-mark { position: fixed; z-index: 10; background: rgba(255,255,255,0.2); }
-    .side-l { left: 20px; top: 50%; width: 15px; height: 1px; transform: translateY(-50%); }
-    .side-r { right: 20px; top: 50%; width: 15px; height: 1px; transform: translateY(-50%); }
+    .line-v-left { position: absolute; left: 15%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
+    .line-v-right { position: absolute; right: 15%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
+    .line-h-top { position: absolute; top: 120px; left: 0; right: 0; height: 1px; background: var(--major-line); }
 
     .tactical-border {
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -91,15 +81,10 @@
 </head>
 <body>
   <div class="grid-bg"></div>
-  <div class="schematic-overlay">
-    <div class="cross-v"></div>
-    <div class="cross-h"></div>
-    <div class="corner corner-tl"></div>
-    <div class="corner corner-tr"></div>
-    <div class="corner corner-bl"></div>
-    <div class="corner corner-br"></div>
-    <div class="side-mark side-l"></div>
-    <div class="side-mark side-r"></div>
+  <div class="structural-lines">
+    <div class="line-v-left"></div>
+    <div class="line-v-right"></div>
+    <div class="line-h-top"></div>
   </div>
   <div id="root"></div>
 </body>
