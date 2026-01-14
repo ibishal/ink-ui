@@ -40,10 +40,11 @@ pub fn drain_vault(&mut self) {
   }
 ];
 
-export const DocumentationOverlay: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+export const DocumentationOverlay: React.FC<{ isOpen: boolean; onClose: () => void; theme?: 'dark' | 'light' }> = ({ isOpen, onClose, theme = 'dark' }) => {
   const [activeDoc, setActiveDoc] = useState(DOC_SECTIONS[0]);
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const isLight = theme === 'light';
 
   useEffect(() => {
     if (isOpen) {
@@ -59,27 +60,46 @@ export const DocumentationOverlay: React.FC<{ isOpen: boolean; onClose: () => vo
   return (
     <div 
       ref={overlayRef}
-      className="fixed inset-0 z-[100] bg-[#0A0A0B] translate-x-full flex flex-col p-12 overflow-hidden border-l border-white/5"
+      className={`fixed inset-0 z-[100] translate-x-full flex flex-col p-12 overflow-hidden border-l ${
+        isLight ? 'bg-white border-zinc-200' : 'bg-[var(--bg-void)] border-[var(--border-color)]'
+      }`}
     >
-      <div className="flex justify-between items-center mb-16 border-b border-white/5 pb-10">
+      <div className={`flex justify-between items-center mb-16 border-b pb-10 ${
+        isLight ? 'border-zinc-200' : 'border-[var(--border-color)]'
+      }`}>
         <div className="flex items-center gap-8">
-           <button onClick={onClose} className="w-14 h-14 tactical-border flex items-center justify-center hover:bg-white hover:text-black transition-all group">
+           <button 
+            onClick={onClose} 
+            className={`w-14 h-14 border flex items-center justify-center transition-all group ${
+              isLight 
+              ? 'border-black bg-white text-black hover:bg-black hover:text-white' 
+              : 'border-[var(--border-color)] hover:bg-ink-pink hover:text-white text-[var(--text-primary)]'
+            }`}
+           >
              <span className="text-lg group-hover:scale-110 transition-transform">✕</span>
            </button>
            <div>
-             <span className="text-[10px] mono text-gray-500 block tracking-[0.5em] mb-1 font-bold uppercase">Archive_System_v.5</span>
-             <h2 className="text-3xl font-black uppercase tracking-tight">Security Protocol Library</h2>
+             <span className={`text-[10px] mono block tracking-[0.5em] mb-1 font-bold uppercase ${
+               isLight ? 'text-zinc-400' : 'text-[var(--text-secondary)]'
+             }`}>Archive_System_v.5</span>
+             <h2 className={`text-3xl font-black uppercase tracking-tight ${
+               isLight ? 'text-black' : 'text-[var(--text-primary)]'
+             }`}>Security Protocol Library</h2>
            </div>
         </div>
       </div>
 
       <div className="flex-1 flex gap-16 overflow-hidden">
-        <div className="w-72 space-y-3">
+        <div className="w-80 space-y-4">
           {DOC_SECTIONS.map(section => (
             <button
               key={section.id}
               onClick={() => setActiveDoc(section)}
-              className={`w-full text-left p-5 tactical-border transition-all ${activeDoc.id === section.id ? 'bg-ink-pink text-white border-ink-pink shadow-[0_0_20px_rgba(230,0,122,0.2)]' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+              className={`w-full text-left p-6 border transition-all ${
+                activeDoc.id === section.id 
+                ? 'bg-ink-pink text-white border-ink-pink shadow-lg' 
+                : `${isLight ? 'bg-zinc-50 border-zinc-300 text-black hover:border-black font-bold' : 'bg-[var(--card-bg)] border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-ink-pink/10'}`
+              }`}
             >
               <span className="text-[11px] font-black uppercase tracking-widest">{section.title}</span>
             </button>
@@ -87,28 +107,37 @@ export const DocumentationOverlay: React.FC<{ isOpen: boolean; onClose: () => vo
         </div>
 
         <div ref={contentRef} className="flex-1 overflow-y-auto pr-12 custom-scrollbar">
-          <h3 className="text-5xl font-black uppercase tracking-tighter mb-8">{activeDoc.title}</h3>
-          <p className="text-xl text-gray-500 font-medium leading-relaxed mb-16 max-w-4xl">
+          <h3 className={`text-5xl font-black uppercase tracking-tighter mb-8 ${
+            isLight ? 'text-black' : 'text-[var(--text-primary)]'
+          }`}>{activeDoc.title}</h3>
+          
+          <p className={`text-xl font-medium leading-relaxed mb-16 max-w-4xl ${
+            isLight ? 'text-zinc-600' : 'text-[var(--text-secondary)]'
+          }`}>
             {activeDoc.description}
           </p>
 
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 mb-20">
             <div className="space-y-6">
-              <span className="text-[11px] mono text-red-500 font-black uppercase tracking-[0.2em] flex items-center gap-3">
-                <div className="w-2 h-2 bg-red-500"></div> VULNERABLE_SOURCE
+              <span className="text-[11px] mono text-red-600 font-black uppercase tracking-[0.2em] flex items-center gap-3">
+                <div className="w-2 h-2 bg-red-600"></div> VULNERABLE_SOURCE
               </span>
-              <div className="tactical-border bg-red-500/5 p-8 rounded-sm">
-                <pre className="mono text-xs text-red-300/80 leading-relaxed overflow-x-auto">
+              <div className={`border p-8 rounded-sm shadow-sm ${
+                isLight ? 'border-red-200 bg-[#FFF5F5]' : 'border-red-500/20 bg-red-500/5'
+              }`}>
+                <pre className={`mono text-xs leading-relaxed overflow-x-auto ${isLight ? 'text-red-950 font-medium' : 'text-red-300/80'}`}>
                   <code>{activeDoc.vulnerable}</code>
                 </pre>
               </div>
             </div>
             <div className="space-y-6">
-              <span className="text-[11px] mono text-green-500 font-black uppercase tracking-[0.2em] flex items-center gap-3">
-                <div className="w-2 h-2 bg-green-500"></div> SECURE_IMPLEMENTATION
+              <span className="text-[11px] mono text-emerald-600 font-black uppercase tracking-[0.2em] flex items-center gap-3">
+                <div className="w-2 h-2 bg-emerald-600"></div> SECURE_IMPLEMENTATION
               </span>
-              <div className="tactical-border bg-green-500/5 p-8 rounded-sm">
-                <pre className="mono text-xs text-green-300/80 leading-relaxed overflow-x-auto">
+              <div className={`border p-8 rounded-sm shadow-sm ${
+                isLight ? 'border-emerald-200 bg-[#F0FFF4]' : 'border-green-500/20 bg-green-500/5'
+              }`}>
+                <pre className={`mono text-xs leading-relaxed overflow-x-auto ${isLight ? 'text-emerald-950 font-medium' : 'text-green-300/80'}`}>
                   <code>{activeDoc.secure}</code>
                 </pre>
               </div>
