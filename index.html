@@ -12,7 +12,7 @@
     :root {
       --ink-pink: #E6007A;
       --bg-void: #0A0A0B;
-      --line-color: rgba(255, 255, 255, 0.025);
+      --line-color: rgba(255, 255, 255, 0.02);
       --major-line: rgba(255, 255, 255, 0.08);
     }
     body {
@@ -31,7 +31,7 @@
       background-image: 
         linear-gradient(to right, var(--line-color) 1px, transparent 1px),
         linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-size: 50px 50px;
       z-index: -2;
     }
 
@@ -42,10 +42,11 @@
       pointer-events: none;
       z-index: -1;
     }
-    .line-v-left { position: absolute; left: 12%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
-    .line-v-right { position: absolute; right: 12%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
+    /* Blueprint Frame Lines */
+    .line-v-left { position: absolute; left: 10%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
+    .line-v-right { position: absolute; right: 10%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
     .line-h-top { position: absolute; top: 110px; left: 0; right: 0; height: 1px; background: var(--major-line); }
-    .line-h-bottom { position: absolute; bottom: 90px; left: 0; right: 0; height: 1px; background: var(--major-line); }
+    .line-h-bottom { position: absolute; bottom: 80px; left: 0; right: 0; height: 1px; background: var(--major-line); }
 
     .tactical-border {
       border: 1px solid rgba(255, 255, 255, 0.08);
