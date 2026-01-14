@@ -12,8 +12,8 @@
     :root {
       --ink-pink: #E6007A;
       --bg-void: #0A0A0B;
-      --line-color: rgba(255, 255, 255, 0.02);
-      --major-line: rgba(255, 255, 255, 0.08);
+      --grid-line: rgba(255, 255, 255, 0.03);
+      --structural-line: rgba(255, 255, 255, 0.1);
     }
     body {
       font-family: 'Space Grotesk', sans-serif;
@@ -24,41 +24,31 @@
     }
     .mono { font-family: 'JetBrains Mono', monospace; }
     
-    /* Structural Grid Lines (Subtle Pattern) */
-    .grid-bg {
+    /* Background Square Grid (40px) */
+    .blueprint-grid {
       position: fixed;
       inset: 0;
+      z-index: -10;
       background-image: 
-        linear-gradient(to right, var(--line-color) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: -2;
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
-    /* Major Layout Frame (2 Vertical, 2 Horizontal) */
-    .structural-lines {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-    }
-    /* Blueprint Frame Lines */
-    .line-v-left { position: absolute; left: 10%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
-    .line-v-right { position: absolute; right: 10%; top: 0; bottom: 0; width: 1px; background: var(--major-line); }
-    .line-h-top { position: absolute; top: 110px; left: 0; right: 0; height: 1px; background: var(--major-line); }
-    .line-h-bottom { position: absolute; bottom: 80px; left: 0; right: 0; height: 1px; background: var(--major-line); }
-
-    .tactical-border {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-    }
-    .tactical-border::before {
-      content: '';
+    /* Crosshair Component Styling */
+    .cross {
       position: absolute;
-      top: -1px; left: -1px; width: 8px; height: 8px;
-      border-top: 1px solid var(--ink-pink);
-      border-left: 1px solid var(--ink-pink);
+      width: 13px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      pointer-events: none;
     }
+    .cross::before { content: ''; position: absolute; width: 13px; height: 1px; background: var(--structural-line); }
+    .cross::after { content: ''; position: absolute; width: 1px; height: 13px; background: var(--structural-line); }
+    .cross.highlight::before, .cross.highlight::after { background: var(--ink-pink); opacity: 0.6; }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 4px; }
@@ -69,22 +59,16 @@
 <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "react/": "https://esm.sh/react@^19.2.3/"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
   }
 }
 </script>
 </head>
 <body>
-  <div class="grid-bg"></div>
-  <div class="structural-lines">
-    <div class="line-v-left"></div>
-    <div class="line-v-right"></div>
-    <div class="line-h-top"></div>
-    <div class="line-h-bottom"></div>
-  </div>
+  <div class="blueprint-grid"></div>
   <div id="root"></div>
 </body>
 </html>

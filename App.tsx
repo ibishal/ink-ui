@@ -7,18 +7,22 @@ import { DocumentationOverlay } from './components/DocumentationOverlay';
 import { SquinkSchematic } from './components/SquinkSchematic';
 import { MissionNode } from './components/MissionNode';
 import { MissionView } from './components/MissionView';
-import { LayoutContainer } from './components/LayoutContainer';
 
 export default function App() {
   const [activeLevel, setActiveLevel] = useState<Level | null>(null);
   const [showDocs, setShowDocs] = useState(false);
 
+  const Crosshair = ({ className = "" }: { className?: string }) => (
+    <div className={`cross ${className}`}></div>
+  );
+
   const HomeView = () => (
-    <div className="flex-1 flex flex-col pt-32">
-      <section className="relative flex flex-col items-center justify-center py-20">
+    <div className="flex-1 flex flex-col">
+      {/* Hero Section */}
+      <section className="relative border-b border-white/10 pt-20">
         <SquinkSchematic />
         
-        <div className="text-center space-y-8 max-w-4xl -mt-24 relative z-30">
+        <div className="text-center space-y-8 max-w-4xl mx-auto -mt-24 pb-32 relative z-30">
           <div className="flex items-center justify-center gap-6">
              <div className="h-px w-20 bg-ink-pink/30"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.6em] text-ink-pink">Guardian Training Interface</span>
@@ -34,36 +38,44 @@ export default function App() {
           <div className="flex justify-center gap-8 pt-6">
              <button 
               onClick={() => setShowDocs(true)}
-              className="px-12 py-5 tactical-border bg-white/5 text-[12px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all"
+              className="px-12 py-5 border border-white/10 bg-white/5 text-[12px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all"
              >
                Access Vault Archives
              </button>
           </div>
         </div>
+
+        {/* Intersection Markers at Hero Bottom Corners */}
+        <Crosshair className="bottom-0 -left-[6px]" />
+        <Crosshair className="bottom-0 -right-[6px]" />
       </section>
 
-      <section className="relative py-32">
-        <div className="flex items-center gap-8 mb-16">
+      {/* Grid Sub-Header */}
+      <div className="relative border-b border-white/10 px-10 py-6 bg-black/20">
+         <div className="flex items-center gap-8">
            <div className="w-3 h-3 bg-ink-pink"></div>
            <h3 className="text-xs font-black uppercase tracking-[0.5em] text-white">Sector_Deployment_Map</h3>
            <div className="flex-1 h-px bg-white/5"></div>
         </div>
+        <Crosshair className="bottom-0 -left-[6px]" />
+        <Crosshair className="bottom-0 -right-[6px]" />
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {LEVELS.map((level, i) => (
-            <MissionNode 
-              key={level.id} 
-              level={level} 
-              index={i} 
-              isLocked={i > 2} 
-              onSelect={(l) => setActiveLevel(l)} 
-            />
-          ))}
-        </div>
+      {/* Mission Bento Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {LEVELS.map((level, i) => (
+          <MissionNode 
+            key={level.id} 
+            level={level} 
+            index={i} 
+            isLocked={i > 2} 
+            onSelect={(l) => setActiveLevel(l)} 
+          />
+        ))}
       </section>
 
-      <footer className="mt-auto py-24 border-t border-white/5">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-12 opacity-40">
+      <footer className="mt-auto py-24 border-t border-white/10 relative">
+        <div className="px-12 flex flex-col md:flex-row justify-between items-center gap-12 opacity-40">
            <div className="flex items-center gap-6">
               <img src="https://use.ink/img/logo/ink-logo-with-squid-white.svg" className="h-8" />
               <span className="font-black text-lg uppercase tracking-tighter text-gray-400">ink!Spector</span>
@@ -77,6 +89,8 @@ export default function App() {
               [ Secure_Transmission_Ready ]
            </div>
         </div>
+        <Crosshair className="top-0 -left-[6px]" />
+        <Crosshair className="top-0 -right-[6px]" />
       </footer>
     </div>
   );
@@ -86,20 +100,27 @@ export default function App() {
       <PlayerHUD />
       <DocumentationOverlay isOpen={showDocs} onClose={() => setShowDocs(false)} />
       
-      <LayoutContainer>
-        {activeLevel ? (
-          <MissionView 
-            level={activeLevel} 
-            onBack={() => setActiveLevel(null)} 
-            onShowDocs={() => setShowDocs(true)} 
-          />
-        ) : (
-          <HomeView />
-        )}
-      </LayoutContainer>
+      {/* Main Structural Vertical Pillars (10% Margins) */}
+      <div className="flex-1 flex flex-col relative mx-[10%] border-x border-white/10 min-h-screen">
+        {/* Intersection Points at the very top (under HUD) */}
+        <Crosshair className="top-[110px] -left-[6px] highlight" />
+        <Crosshair className="top-[110px] -right-[6px] highlight" />
+
+        <div className="flex-1 flex flex-col mt-[110px]">
+          {activeLevel ? (
+            <MissionView 
+              level={activeLevel} 
+              onBack={() => setActiveLevel(null)} 
+              onShowDocs={() => setShowDocs(true)} 
+            />
+          ) : (
+            <HomeView />
+          )}
+        </div>
+      </div>
 
       {/* Connection Status Indicator */}
-      <div className="fixed bottom-10 right-10 flex items-center gap-5 bg-black/90 tactical-border px-6 py-3 z-40 border-white/10 shadow-2xl">
+      <div className="fixed bottom-10 right-10 flex items-center gap-5 bg-black/90 border border-white/10 px-6 py-3 z-40 shadow-2xl">
          <div className="flex gap-1 h-2 items-end">
             <div className="w-1.5 h-[60%] bg-ink-pink/50"></div>
             <div className="w-1.5 h-[100%] bg-ink-pink"></div>
