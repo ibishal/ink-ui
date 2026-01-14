@@ -1,0 +1,5 @@
+{
+  "name": "ink!Spector Gadget",
+  "description": "A gamified Capture-The-Flag (CTF) platform for learning ink! smart contract security through interactive challenges, real-time exploits, and AI-powered guidance.",
+  "requestFramePermissions": []
+}
