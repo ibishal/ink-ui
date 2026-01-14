@@ -34,12 +34,12 @@ export const SquinkSchematic: React.FC = () => {
          <span className="absolute right-0 top-1/2 -translate-y-1/2 rotate-90">Angle.Ref_090.00</span>
       </div>
 
-      {/* Hero Mascot */}
+      {/* Hero Mascot - Resized to be broader */}
       <div className="mascot-hero relative z-20">
         <img 
           src="https://use.ink/img/ink-squink.svg" 
           alt="Squink" 
-          className="w-64 h-64 drop-shadow-[0_0_80px_rgba(230,0,122,0.1)]" 
+          className="w-80 h-80 drop-shadow-[0_0_100px_rgba(230,0,122,0.15)]" 
         />
         <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
            <div className="w-[1px] h-12 bg-gradient-to-b from-ink-pink to-transparent"></div>
