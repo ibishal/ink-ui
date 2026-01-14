@@ -78,7 +78,7 @@ export const MissionView: React.FC<MissionViewProps> = ({ level, onBack, onShowD
 
         {/* Code Mirror */}
         <div className={`flex-1 border flex flex-col overflow-hidden shadow-sm ${
-          isLight ? 'bg-[#F9FAFB] border-zinc-200' : 'border-[var(--border-color)] bg-black/80'
+          isLight ? 'bg-white border-zinc-200' : 'border-[var(--border-color)] bg-black/80'
         }`}>
            <div className={`p-4 flex justify-between items-center border-b ${
              isLight ? 'bg-zinc-100 border-zinc-200' : 'bg-[#121215] border-[var(--border-color)]'
@@ -88,7 +88,7 @@ export const MissionView: React.FC<MissionViewProps> = ({ level, onBack, onShowD
               </span>
            </div>
            <pre className={`flex-1 p-12 overflow-auto mono text-sm leading-relaxed custom-scrollbar ${
-             isLight ? 'text-[#1A1B26] selection:bg-blue-100' : 'text-indigo-300/80'
+             isLight ? 'text-[#111827] bg-white' : 'text-indigo-300/80 bg-transparent'
            }`}>
               <code className={isLight ? 'opacity-100 font-medium' : ''}>{level.sourceCode}</code>
            </pre>

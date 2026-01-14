@@ -49,7 +49,7 @@ export const PlayerHUD: React.FC<PlayerHUDProps> = ({ theme, onToggleTheme }) =>
              <div className="absolute inset-0 bg-ink-pink/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
              <img 
                 src="https://use.ink/img/ink-squink.svg" 
-                className={`w-6 h-6 transition-transform duration-500 ${theme === 'light' ? 'invert' : ''} group-active:scale-150`}
+                className={`w-9 h-9 transition-transform duration-500 ${theme === 'light' ? 'invert' : ''} group-active:scale-110`}
              />
           </button>
 

@@ -98,7 +98,7 @@ export const DocumentationOverlay: React.FC<{ isOpen: boolean; onClose: () => vo
               className={`w-full text-left p-6 border transition-all ${
                 activeDoc.id === section.id 
                 ? 'bg-ink-pink text-white border-ink-pink shadow-lg' 
-                : `${isLight ? 'bg-zinc-50 border-zinc-300 text-black hover:border-black font-bold' : 'bg-[var(--card-bg)] border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-ink-pink/10'}`
+                : `${isLight ? 'bg-zinc-50 border-zinc-200 text-black hover:border-black font-bold' : 'bg-[var(--card-bg)] border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-ink-pink/10'}`
               }`}
             >
               <span className="text-[11px] font-black uppercase tracking-widest">{section.title}</span>
@@ -123,9 +123,9 @@ export const DocumentationOverlay: React.FC<{ isOpen: boolean; onClose: () => vo
                 <div className="w-2 h-2 bg-red-600"></div> VULNERABLE_SOURCE
               </span>
               <div className={`border p-8 rounded-sm shadow-sm ${
-                isLight ? 'border-red-200 bg-[#FFF5F5]' : 'border-red-500/20 bg-red-500/5'
+                isLight ? 'border-red-200 bg-[#FFF9F9]' : 'border-red-500/20 bg-red-500/5'
               }`}>
-                <pre className={`mono text-xs leading-relaxed overflow-x-auto ${isLight ? 'text-red-950 font-medium' : 'text-red-300/80'}`}>
+                <pre className={`mono text-xs leading-relaxed overflow-x-auto ${isLight ? 'text-red-950 font-bold' : 'text-red-300/80'}`}>
                   <code>{activeDoc.vulnerable}</code>
                 </pre>
               </div>
@@ -135,9 +135,9 @@ export const DocumentationOverlay: React.FC<{ isOpen: boolean; onClose: () => vo
                 <div className="w-2 h-2 bg-emerald-600"></div> SECURE_IMPLEMENTATION
               </span>
               <div className={`border p-8 rounded-sm shadow-sm ${
-                isLight ? 'border-emerald-200 bg-[#F0FFF4]' : 'border-green-500/20 bg-green-500/5'
+                isLight ? 'border-emerald-200 bg-[#F6FFF9]' : 'border-green-500/20 bg-green-500/5'
               }`}>
-                <pre className={`mono text-xs leading-relaxed overflow-x-auto ${isLight ? 'text-emerald-950 font-medium' : 'text-green-300/80'}`}>
+                <pre className={`mono text-xs leading-relaxed overflow-x-auto ${isLight ? 'text-emerald-950 font-bold' : 'text-green-300/80'}`}>
                   <code>{activeDoc.secure}</code>
                 </pre>
               </div>
